@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    consul:
+      port: 8500
+      host: localhost
+      discovery:
+        deregister: true
+        service-name: ${spring.application.name}
+        health-check-critical-timeout: 5s
+    gateway:
+      routes:
+        - id: users_route
+          uri: lb://users
+          predicates:
+            - Path=/user/**
+
+        - id: emps_route
+          uri: lb://emps
+          predicates:
+            - Path=/emp/**
+      globalcors:     #设置跨域访问 允许所有域允许所有请求和方法
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+        add-to-simple-url-handler-mapping: true
+  application:
+    name: gateway
+server:
+  port: 8992
