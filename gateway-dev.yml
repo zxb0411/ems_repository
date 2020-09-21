@@ -28,7 +28,7 @@ spring:
   application:
     name: gateway
   rabbitmq:
-    host: 127.20.10.10
+    host: 172.20.10.10
     port: 5672
     username: guest
     password: guest
